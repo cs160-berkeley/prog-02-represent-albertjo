@@ -4,7 +4,7 @@ View your local representatives and senators right from your watch and phone!
 
 ## Authors
 
-Albert Jo ([your_email@berkeley.edu](mailto:namhyun@berkeley.edu))
+Albert Jo ([namhyun@berkeley.edu](mailto:namhyun@berkeley.edu))
 
 ## Demo Video
 
