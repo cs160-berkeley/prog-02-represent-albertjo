@@ -1,75 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <LinearLayout android:layout_width="wrap_content"
+    <RelativeLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/topLayout">
 
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="5dp"
-            android:src="@drawable/boxer"/>
-
-        <LinearLayout android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/contactLayout">
+
+            <com.cs160.joleary.catnip.CircleNetworkImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iconImageView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/people"
+                android:layout_alignParentTop="true"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#22A7F0"/>
+
 
             <TextView
                 android:id="@+id/item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:padding="2dp" />
+                android:text="Name"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/iconImageView"
+                android:layout_marginLeft="10dp" />
+
             <TextView
                 android:id="@+id/emailTextView"
+                android:autoLink="email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:layout_toRightOf="@id/iconImageView"
+                android:layout_below="@id/item"
+                android:text="email"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
+                android:autoLink="web"
                 android:id="@+id/homepageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
+                android:layout_toRightOf="@id/iconImageView"
+                android:layout_below="@id/emailTextView"
+                android:text="link"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"/>
 
-        <Button
-            android:id="@+id/detailButton"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_alignParentRight="true"
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/detailViewButton"
+            android:scaleType="fitCenter"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="15dp"
-            android:text="+" />
+            android:src="@drawable/arrows"
+            android:background="@null"
+            android:layout_alignParentRight="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
+    <RelativeLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/tweetView"
+        android:layout_below="@+id/topLayout">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/twitter"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/twitterLogo"
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/tweetTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-
-
-
-
-
-</LinearLayout>
+            android:layout_toRightOf="@+id/twitterLogo"
+            android:layout_marginLeft="10dp"
+            android:textColor="#95A5A6"
+            android:layout_weight="28.27" />
+    </RelativeLayout>
+</RelativeLayout>

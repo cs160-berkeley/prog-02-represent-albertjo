@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutForDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="S-234"
+            android:textColor="#6C7A89"
+            android:textStyle="bold"
+            android:id="@+id/bill_id_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:text="2015-04-18"
+            android:textColor="#95A5A6"
+            android:id="@+id/bill_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="12sp"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bill name"
+        android:id="@+id/bill_name_text_view"
+        android:layout_below="@+id/relativeLayoutForDate"
+        android:layout_alignParentLeft="true"/>
+
+</RelativeLayout>

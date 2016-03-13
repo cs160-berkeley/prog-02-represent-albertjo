@@ -1,5 +1,7 @@
 package com.cs160.joleary.catnip;
 
+import com.google.gson.JsonObject;
+
 /**
  * Created by namhyun on 3/2/16.
  */
@@ -22,4 +24,7 @@ public class CongressMember {
         this.tweetTimeStamp = "4h";
     }
 
+    public static CongressMember congressMemberFromJSON(JsonObject jsonObject) {
+        return null;
+    }
 }

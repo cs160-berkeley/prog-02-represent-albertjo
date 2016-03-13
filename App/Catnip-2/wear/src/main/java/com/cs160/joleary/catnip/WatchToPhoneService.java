@@ -10,20 +10,13 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by joleary and noon on 2/19/16 at very late in the night. (early in the morning?)
  */
-public class WatchToPhoneService extends Service implements GoogleApiClient.ConnectionCallbacks {
-
+public class    WatchToPhoneService extends Service implements GoogleApiClient.ConnectionCallbacks {
     private GoogleApiClient mWatchApiClient;
-    private List<Node> nodes = new ArrayList<>();
-    Node mNode;
-    String name = "";
-    String party = "";
-    String termEndDate = "";
+    private static String PATH = "/launch_detail_congressional_view";
+    String id;
 
     @Override
     public void onCreate() {
@@ -53,33 +46,30 @@ public class WatchToPhoneService extends Service implements GoogleApiClient.Conn
     @Override //we need this to implement GoogleApiClient.ConnectionsCallback
     public void onConnectionSuspended(int i) {}
 
-    private void sendMessage(final String path, final String text ) {
+    private void sendMessage(final String text ) {
         new Thread( new Runnable() {
             @Override
             public void run() {
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mWatchApiClient ).await();
                 for (Node node : nodes.getNodes()) {
                     Wearable.MessageApi.sendMessage(
-                            mWatchApiClient, node.getId(), path, text.getBytes());
+                            mWatchApiClient, node.getId(), PATH, text.getBytes());
                 }
 
             }
         }).start();
     }
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        this.name = (String) intent.getExtras().get("name");
-        //this.party = (String) intent.getExtras().get("party");
-        //this.termEndDate = (String) intent.getExtras().get("termEndDate");
+        this.id = (String) intent.getExtras().get("id");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //first, connect to the apiclient
                 mWatchApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/launch_detail_congressional_view", name);
+                sendMessage(id);
             }
         }).start();
 

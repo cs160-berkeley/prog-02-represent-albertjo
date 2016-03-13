@@ -4,18 +4,23 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
+import com.cs160.joleary.catnip.Classes.Legislator;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 /**
  * Created by joleary on 2/19/16.
  */
 public class PhoneToWatchService extends Service {
+    private static String path = "/update_watch_view";
+    private ArrayList<Legislator> legislators;
 
     private GoogleApiClient mApiClient;
 
@@ -29,7 +34,6 @@ public class PhoneToWatchService extends Service {
                     @Override
                     public void onConnected(Bundle connectionHint) {
                     }
-
                     @Override
                     public void onConnectionSuspended(int cause) {
                     }
@@ -48,8 +52,7 @@ public class PhoneToWatchService extends Service {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
-        final String catName = extras.getString("CAT_NAME");
-
+        legislators = extras.getParcelableArrayList("legislators");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -57,10 +60,9 @@ public class PhoneToWatchService extends Service {
                 //first, connect to the apiclient
                 mApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + catName, catName);
+                sendMessage();
             }
         }).start();
-
         return START_STICKY;
     }
 
@@ -69,23 +71,21 @@ public class PhoneToWatchService extends Service {
         return null;
     }
 
-    private void sendMessage( final String path, final String text ) {
+    private void sendMessage() {
         //one way to send message: start a new thread and call .await()
         //see watchtophoneservice for another way to send a message
+        Gson gson = new Gson();
+        final String jsonString = gson.toJson(legislators);
+
         new Thread( new Runnable() {
             @Override
             public void run() {
                 NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mApiClient ).await();
                 for(Node node : nodes.getNodes()) {
-                    //we find 'nodes', which are nearby bluetooth devices (aka emulators)
-                    //send a message for each of these nodes (just one, for an emulator)
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                            mApiClient, node.getId(), path, text.getBytes() ).await();
-                    //4 arguments: api client, the node ID, the path (for the listener to parse),
-                    //and the message itself (you need to convert it to bytes.)
+                            mApiClient, node.getId(), path, jsonString.getBytes()).await();
                 }
             }
         }).start();
     }
-
 }
