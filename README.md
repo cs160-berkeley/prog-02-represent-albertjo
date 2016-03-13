@@ -1,20 +1,27 @@
 # PROG 02: Represent!
 
-Briefly describe your app here.
+View your local representatives and senators right from your watch and phone!
 
 ## Authors
 
-FirstName LastName ([your_email@berkeley.edu](mailto:your_email@berkeley.edu))
+Albert Jo ([namhyun@berkeley.edu](mailto:namhyun@berkeley.edu))
 
 ## Demo Video
 
-See [your demo video title here] (https://link_to_your_video)
+See [demo] (https://www.youtube.com/watch?v=jyao2niMeAI)
 
 ## Screenshots
 
-<img src="screenshots/main.png" height="400" alt="Screenshot"/>
+<img src="screenshots/face1.png" height="400" alt="Screenshot"/>
+<img src="screenshots/face2.png" height="400" alt="Screenshot"/>
+<img src="screenshots/face3.png" height="400" alt="Screenshot"/>
+
+<img src="screenshots/phone1.png" height="400" alt="Screenshot"/>
+<img src="screenshots/phone2.png" height="400" alt="Screenshot"/>
+<img src="screenshots/phone3.png" height="400" alt="Screenshot"/>
 
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
 * Any other support
+
